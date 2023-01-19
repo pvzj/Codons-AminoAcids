@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
 
-import java.util.*;
+
 public class getAminoAcidFromCodon {
     public static HashMap<String, String> table = new HashMap<>();
     public static void main(String[] args) throws IOException {
