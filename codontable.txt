@@ -1,0 +1,4 @@
+AUG Methionine
+UAA Stop
+UAG Stop
+UGA Stop
