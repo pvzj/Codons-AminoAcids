@@ -19,7 +19,7 @@ public class getAminoAcidFromCodon {
 
         System.out.println(getAminoAcidFromCodon("CCC"));
     }
-    
+
     public static String getAminoAcidFromCodon(String codon) {
         return table.get(codon);
     }
