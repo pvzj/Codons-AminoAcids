@@ -15,6 +15,16 @@ public class CodonAminoAcid {
         return table.get(codon);
     }
 
+    public static String aminoAcidCodonChecker(String codons, String aminoAcids) {
+        String output = "";
+
+        for (int i = 0; i < codons.length(); i = i + 3) {
+            
+        }
+
+        return output;
+    }
+
     public static void fillHashMap(String fileName) throws IOException {
         // Creates a new file reader on fileName
         BufferedReader br =
@@ -32,6 +42,7 @@ public class CodonAminoAcid {
 
     // Main method, currently used for testing purposes
     public static void main(String[] args) throws IOException {
+        // calls fillHashMap and fills the hashmap using codontable.txt
         fillHashMap("codontable.txt");
 
         // calls getAminoAcidFromCodon using "CCC" as a test codon and prints
