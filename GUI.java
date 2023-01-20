@@ -1,5 +1,5 @@
+//Code is from:
 //https://www3.ntu.edu.sg/home/ehchua/programming/java/j4a_gui.html
-//Joe mama
 import java.awt.*;
 import java.awt.event.*;
 
@@ -21,7 +21,7 @@ public class GUI extends Frame {
         button = new Button("Submit");
         add(button);
 
-        setTitle("Hi Vehd");
+        setTitle("Try closing me bi***");
         setSize(300,100);
         setVisible(true);
        
