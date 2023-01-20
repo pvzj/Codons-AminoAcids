@@ -11,15 +11,14 @@ public class CodonAminoAcid {
 
     // Function that takes a three letter codon as its input and
     // returns the corresponding amino acid name
-    public static String getAminoAcidFromCodon(String codon) {
+    public static String codonToAminoAcid(String codon) {
         return table.get(codon);
     }
 
-    // Main method, currently used for testing purposes
-    public static void main(String[] args) throws IOException {
-        // Creates a new file reader on codontable.txt
+    public static void fillHashMap(String fileName) throws IOException {
+        // Creates a new file reader on fileName
         BufferedReader br =
-                new BufferedReader(new FileReader("codontable.txt"));
+                new BufferedReader(new FileReader(fileName));
 
         // Loops through the read in text file and
         // assigns value to the hashmap
@@ -29,8 +28,13 @@ public class CodonAminoAcid {
             String aminoAcid = st.nextToken();
             table.put(codon, aminoAcid);
         }
+    }
+
+    // Main method, currently used for testing purposes
+    public static void main(String[] args) throws IOException {
+        fillHashMap("codontable.txt");
 
         // calls getAminoAcidFromCodon using "CCC" as a test codon and prints
-        System.out.println(getAminoAcidFromCodon("CCC"));
+        System.out.println(codonToAminoAcid("CCC"));
     }
 }
