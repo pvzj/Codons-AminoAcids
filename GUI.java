@@ -8,6 +8,7 @@ public class GUI extends Frame {
     private TextField tf;
     private Button button;
     private String input;
+    private boolean pushed;
 
     public GUI() {
         setLayout(new FlowLayout());
@@ -21,20 +22,34 @@ public class GUI extends Frame {
         button = new Button("Submit");
         add(button);
 
+        BtnListener listener = new BtnListener();
+        button.addActionListener(listener);
+
+        pushed = false;
+
         setTitle("Try closing me bi***");
         setSize(300,100);
         setVisible(true);
        
     }
 
-    public static void main(String[] args) {
-        new GUI();
+    public String getText() {
+        return tf.getText();
     }
 
-    // private class BtnCountListener implements ActionListener {
-    //     @Override
-    //     public void actionPerformed(ActionEvent event) {
-    //         input = tf.getName();
-    //     }
-    // }
+    public boolean isPushed() {
+        return pushed;
+    }
+
+    public static void main(String[] args) {
+        GUI g = new GUI();
+        
+    }
+
+    private class BtnListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent event) {
+            System.out.println(tf.getText());
+        }
+    }
 }
