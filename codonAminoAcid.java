@@ -15,13 +15,31 @@ public class CodonAminoAcid {
         return table.get(codon);
     }
 
-    public static String aminoAcidCodonChecker(String codons, String aminoAcids) {
-        String output = "";
+    // Converts a string of nucleotide letters to a series of amino acids
+    public static String codonsToAminoAcids(String codons) {
+        String output = ""; // Output string
+        int codonsLength = codons.length(); // codons string length
 
-        for (int i = 0; i < codons.length(); i = i + 3) {
-            
+        // Checks to make sure codon string is made of complete codons
+        if (codonsLength % 3 != 0 ) {
+            output = "Error, incomplete codon.";
+            return output;
         }
 
+        // Converts codons to amino acids
+        for (int i = 0; i < codonsLength; i = i + 3) {
+            String codon = codons.substring(i, i + 3);
+
+            output += codonToAminoAcid(codon);
+            output += " ";
+        }
+
+        return output;
+    }
+
+    // Incomplete function, disregard for now
+    public static String aminoAcidCodonChecker(String codons, String aminoAcids) {
+        String output = "";
         return output;
     }
 
@@ -47,5 +65,9 @@ public class CodonAminoAcid {
 
         // calls getAminoAcidFromCodon using "CCC" as a test codon and prints
         System.out.println(codonToAminoAcid("CCC"));
+
+        // calls codonsToAminoAcids and spits out the corresponding
+        // amino acid chain
+        System.out.println(codonsToAminoAcids("CCCCCCCAAAUGACU"));
     }
 }
