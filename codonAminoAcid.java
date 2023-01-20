@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
 
-public class getAminoAcidFromCodon {
+public class codonAminoAcid {
     public static HashMap<String, String> table = new HashMap<>();
     // Creates a new HashMap object called table that takes only strings
 
