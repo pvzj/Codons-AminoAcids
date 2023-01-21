@@ -38,8 +38,17 @@ public class CodonAminoAcid {
     }
 
     // Incomplete function, disregard for now
-    public static String aminoAcidCodonChecker(String codons, String aminoAcids) {
+    public static String aminoAcidCodonChecker(String codons, String correctAminoAcids) {
         String output = "";
+        String aminoAcids = codonsToAminoAcids(codons);
+        System.out.println(aminoAcids);
+
+        if (aminoAcids.equals(correctAminoAcids)) {
+            output = "Correct.";
+        } else {
+            output = "Incorrect.";
+        }
+
         return output;
     }
 
@@ -69,5 +78,8 @@ public class CodonAminoAcid {
         // calls codonsToAminoAcids and spits out the corresponding
         // amino acid chain
         System.out.println(codonsToAminoAcids("CCCCCCCAAAUGACU"));
+
+        // tests aminoAcidCodonChecker
+        System.out.println(aminoAcidCodonChecker("CCCCCCCAAAUGACU", "Proline Proline Glutamine Methionine Threonine "));
     }
 }
