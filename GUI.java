@@ -2,6 +2,7 @@
 //https://www3.ntu.edu.sg/home/ehchua/programming/java/j4a_gui.html
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 
 public class GUI extends Frame {
     private Label label;
@@ -44,19 +45,24 @@ public class GUI extends Frame {
     }
 
     public static void main(String[] args) {
-        GUI g = new GUI();
-        
+        new GUI();
+        try {
+            CodonAminoAcid.fillHashMap("codonTable.txt");
+        } catch(IOException e) {
+            System.out.println("Codon Table Not Found");
+            System.exit(2);
+        }
     }
 
     private class BtnListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            System.out.println(tf.getText());
+            System.out.println(CodonAminoAcid.codonsToAminoAcids(tf.getText()));
+            tf.setText("");
         }
     }
 
     private class GUIWindowListener implements WindowListener {
-
         @Override
         public void windowOpened(WindowEvent e) {}
 
