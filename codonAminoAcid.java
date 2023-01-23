@@ -1,11 +1,10 @@
-//Main Method?
-
 // Imports
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
+import java.util.StringTokenizer;
 
 public class CodonAminoAcid {
     public static HashMap<String, String> table = new HashMap<>();
@@ -69,6 +68,20 @@ public class CodonAminoAcid {
         }
     }
 
+    public static String parseInput(String input) {
+        String output = "";
+        input = input.replaceAll("\\s", "");
+        input = input.toLowerCase();
+        String words[] = input.split(",");
+
+        for (int i = 0; i < words.length; i++) {
+            System.out.println(words[i]);
+            output += words[i];
+        }
+
+        return output;
+    }
+
     // Main method, currently used for testing purposes
     public static void main(String[] args) throws IOException {
         // calls fillHashMap and fills the hashmap using codontable.txt
@@ -82,6 +95,12 @@ public class CodonAminoAcid {
         System.out.println(codonsToAminoAcids("CCCCCCCAAAUGACU"));
 
         // tests aminoAcidCodonChecker
-        System.out.println(aminoAcidCodonChecker("CCCCCCCAAAUGACU", "Proline Proline Glutamine Methionine Threonine "));
+        System.out.println(aminoAcidCodonChecker(
+                "CCCCCCCAAAUGACU",
+                "Proline Proline Glutamine Methionine Threonine "));
+
+        // tests parseInput
+        System.out.println(parseInput(
+                "Proline, Proline, Glutamine, Methionine, Threonine"));
     }
 }
