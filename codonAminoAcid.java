@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
-import java.util.StringTokenizer;
+
 
 public class CodonAminoAcid {
     public static HashMap<String, String> table = new HashMap<>();
@@ -21,9 +21,9 @@ public class CodonAminoAcid {
         String output = ""; // Output string
         int codonsLength = codons.length(); // codons string length
 
-        // Checks to make sure codon string is made of complete codons
-        if (codonsLength % 3 != 0 ) {
-            output = "Error, incomplete codon.";
+        // Checks to make sure codon string is in the correct format
+        if (!isValidCodonString(codons)) {
+            output = "Error, invalid codon.";
             return output;
         }
 
@@ -84,6 +84,34 @@ public class CodonAminoAcid {
 
         return output;
     }
+
+    public static boolean isValidCodonString(String s) {
+        if (s == null || s.length() == 0) {
+            System.out.println("Empty input");
+            return false;
+        }
+
+        if (s.length() % 3 != 0) {
+            System.out.println("Length of string not divisible by 3");
+            return false;
+        }
+
+        if (new StringTokenizer(s, " ").countTokens() != 1) {
+            System.out.println("More than one token long");
+            return false;
+        }
+
+        for (int i = 0; i < s.length(); i++) {
+            char c= s.charAt(i);
+            if (!(c == 'A' || c == 'C' || c == 'G' || c == 'U')) {
+                System.out.println("Contains invalid character");
+                return false;
+            }
+        }
+
+        return true;
+    }
+
 
     // Main method, currently used for testing purposes
     public static void main(String[] args) throws IOException {
