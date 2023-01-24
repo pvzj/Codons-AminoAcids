@@ -32,7 +32,10 @@ public class CodonAminoAcid {
             String codon = codons.substring(i, i + 3);
 
             output += codonToAminoAcid(codon);
-            output += " ";
+            
+            if (i + 3 != codonsLength) {
+                output += ", ";
+            }
         }
 
         return output;
