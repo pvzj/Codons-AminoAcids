@@ -1,10 +1,11 @@
-//Code is from:
+//Code is inspired by:
 //https://www3.ntu.edu.sg/home/ehchua/programming/java/j4a_gui.html
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 
 public class GUI extends Frame {
+    private Frame frame;
     private Label label;
     private TextField tf;
     private Button button;
@@ -12,7 +13,11 @@ public class GUI extends Frame {
     private boolean pushed;
 
     public GUI() {
-        setLayout(new FlowLayout());
+        frame = new Frame("Codons-Amino Acids");
+        frame.setSize(400,400);
+        frame.setLayout(new FlowLayout());
+        frame.addWindowListener(new GUIWindowListener());
+
         label = new Label("Codon:");
         add(label);
 
@@ -30,9 +35,11 @@ public class GUI extends Frame {
 
         addWindowListener(new GUIWindowListener());
 
-        setTitle("Codons-Amino Acids");
-        setSize(300,100);
-        setVisible(true);
+        frame.add(label);
+        frame.add(tf);
+        frame.add(button);
+
+        // frame.setVisible(true);
        
     }
 
@@ -44,8 +51,23 @@ public class GUI extends Frame {
         return pushed;
     }
 
+    private void showMenu() {
+        final MenuBar menuBar = new MenuBar();
+        Menu Menu1 = new Menu("Shit1");
+        Menu Menu2 = new Menu("Shit2");
+        Menu Menu3 = new Menu("Shit3");
+        
+        
+        menuBar.add(Menu1);
+        menuBar.add(Menu2);
+        menuBar.add(Menu3);
+        frame.setMenuBar(menuBar);
+        frame.setVisible(true);
+    }
+
     public static void main(String[] args) {
-        new GUI();
+        GUI g = new GUI();
+        g.showMenu();
         try {
             CodonAminoAcid.fillHashMap("codonTable.txt");
         } catch(IOException e) {
@@ -95,4 +117,11 @@ public class GUI extends Frame {
         }
 
     }
+
+    class MenuItemListener implements ActionListener {
+        public void actionPerformed(ActionEvent e) {            
+            label.setText(e.getActionCommand() 
+              + " MenuItem clicked.");
+        }    
+     }
 }
