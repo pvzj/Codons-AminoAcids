@@ -6,20 +6,18 @@ import java.io.IOException;
 public class menuGUI extends JFrame{
     private JPanel CAPanel = new JPanel();
     private JLabel CAInputLabel;
-    private JTextField CAInputTextField;
+    private JTextArea CAInputTextField;
     private JButton CAButton; 
     private JLabel CAOutputLabel;
-    private JTextField CAOutputTextField;
+    private JTextArea CAOutputTextField;
 
     private JPanel ACPanel= new JPanel();
-    private JPanel panel3 = new JPanel();
 
     public menuGUI(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         initMenu();
         panel1Init();
         
-        ACPanel.setBackground(Color.RED);
         setLayout(new FlowLayout());
     }
 
@@ -29,12 +27,16 @@ public class menuGUI extends JFrame{
         row1.setSize(new Dimension(100,10));
         JPanel row2 = new JPanel();
 
-        CAInputLabel = new JLabel("Codon:");
+        CAInputLabel = new JLabel("                         Codon:       ");
         row1.add(CAInputLabel);
 
-        CAInputTextField = new JTextField(9);
+        CAInputTextField = new JTextArea(4,13);
+        
+        // JScrollPane j = new JScrollPane(CAInputTextField);
         CAInputTextField.setEditable(true);
+        CAInputTextField.setLineWrap(true);
         row1.add(CAInputTextField);
+
 
         CAButton = new JButton("Submit");
         row1.add(CAButton);
@@ -42,15 +44,20 @@ public class menuGUI extends JFrame{
         CAOutputLabel = new JLabel("Amino Acid:");
         row2.add(CAOutputLabel);
 
-        CAOutputTextField = new JTextField(9);
+        
+        CAOutputTextField = new JTextArea(7,13);
+        CAOutputTextField.setLineWrap(true);
+        CAOutputTextField.setWrapStyleWord(true);
         CAOutputTextField.setEditable(false);
-        row2.add(CAOutputTextField);
+        JScrollPane CAOutputTextFieldScrollPane = new JScrollPane(CAOutputTextField);
+        row2.add(CAOutputTextFieldScrollPane);
 
         CAButtonListener listener = new CAButtonListener();
         CAButton.addActionListener(listener);
 
         CAPanel.add(row1);
         CAPanel.add(row2);
+
         CAPanel.setVisible(true);
     }
 
@@ -70,7 +77,9 @@ public class menuGUI extends JFrame{
     private class CAButtonListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent event) {
-            String aminoAcid = CodonAminoAcid.codonsToAminoAcids(CAInputTextField.getText());
+            CAOutputTextField.setText("");
+            String input = CAInputTextField.getText();
+            String aminoAcid = CodonAminoAcid.codonsToAminoAcids(input.toUpperCase());
             System.out.println(aminoAcid);
             CAOutputTextField.setText(aminoAcid);
             CAInputTextField.setText("");
