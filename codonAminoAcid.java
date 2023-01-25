@@ -87,7 +87,10 @@ public class CodonAminoAcid {
 
     public static String parseCodons(String input) {
         String output = "";
-        
+
+        output = input.replaceAll("[^a-zA-Z]","");
+        output = output.toUpperCase();
+
         return output;
     }
 
@@ -126,8 +129,8 @@ public class CodonAminoAcid {
 
         // calls codonsToAminoAcids and spits out the corresponding
         // amino acid chain
+        System.out.println();
         System.out.println(codonsToAminoAcids("CCCCCCCAAAUGACU"));
-
         System.out.println();
 
         // tests aminoAcidCodonChecker
