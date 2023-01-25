@@ -170,7 +170,7 @@ public class menuGUI extends JFrame{ //main class
         JMenuBar menubar = new JMenuBar(); //create menu bar
         JMenu menu = new JMenu("Menu");
         JMenuItem menuItem1 = new JMenuItem("Codons-Amino Acids");
-        JMenuItem menuItem2 = new JMenuItem("Amino Acids-Codons");
+        JMenuItem menuItem2 = new JMenuItem("Amino Acids-Codons Checker");
         menubar.add(menu); //add components
         menu.add(menuItem1);
         menu.add(menuItem2);
