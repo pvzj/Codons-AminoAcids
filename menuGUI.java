@@ -30,6 +30,7 @@ public class menuGUI extends JFrame{ //main class
     //constructor
     public menuGUI(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setResizable(false);
         initMenu(); //initialize menu bar
         panel1Init(); //initialize panels
         panel2Init();
