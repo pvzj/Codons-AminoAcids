@@ -45,7 +45,8 @@ public class CodonAminoAcid {
     public static String aminoAcidCodonChecker(String codons, String correctAminoAcids) {
         String output = "";
         String aminoAcids = codonsToAminoAcids(codons);
-        System.out.println(aminoAcids);
+        correctAminoAcids = parseAminoAcids(correctAminoAcids);
+        aminoAcids = parseAminoAcids(aminoAcids);
 
         if (aminoAcids.equals(correctAminoAcids)) {
             output = "Correct.";
@@ -71,17 +72,22 @@ public class CodonAminoAcid {
         }
     }
 
-    public static String parseInput(String input) {
+    public static String parseAminoAcids(String input) {
         String output = "";
         input = input.replaceAll("\\s", "");
         input = input.toLowerCase();
         String words[] = input.split(",");
 
         for (int i = 0; i < words.length; i++) {
-            System.out.println(words[i]);
             output += words[i];
         }
 
+        return output;
+    }
+
+    public static String parseCodons(String input) {
+        String output = "";
+        
         return output;
     }
 
@@ -118,20 +124,21 @@ public class CodonAminoAcid {
         // calls fillHashMap and fills the hashmap using codontable.txt
         fillHashMap("codontable.txt");
 
-        // calls getAminoAcidFromCodon using "CCC" as a test codon and prints
-        System.out.println(codonToAminoAcid("CCC"));
-
         // calls codonsToAminoAcids and spits out the corresponding
         // amino acid chain
         System.out.println(codonsToAminoAcids("CCCCCCCAAAUGACU"));
 
+        System.out.println();
+
         // tests aminoAcidCodonChecker
         System.out.println(aminoAcidCodonChecker(
                 "CCCCCCCAAAUGACU",
-                "Proline Proline Glutamine Methionine Threonine "));
+                "Proline, Proline, Glutamine, Methionine, Threonine"));
+
+        System.out.println();
 
         // tests parseInput
-        System.out.println(parseInput(
+        System.out.println(parseAminoAcids(
                 "Proline, Proline, Glutamine, Methionine, Threonine"));
     }
 }
