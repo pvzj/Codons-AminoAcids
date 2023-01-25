@@ -42,13 +42,16 @@ public class menuGUI extends JFrame{ //main class
         //set size
         CArow1.setSize(new Dimension(100,10));
         //codon label
-        CAInputLabel = new JLabel("                         Codon:       ");
+        CAInputLabel = new JLabel("                          Codon:       ");
         CArow1.add(CAInputLabel);
         //text input
         CAInputTextArea = new JTextArea(4,13);
         CAInputTextArea.setEditable(true);
         CAInputTextArea.setLineWrap(true);
         CArow1.add(CAInputTextArea);
+        //scroll bar
+        JScrollPane CAInputTextAreaScrollPane = new JScrollPane(CAInputTextArea);
+        CArow1.add(CAInputTextAreaScrollPane);
         //button
         CAButton = new JButton("Submit");
         CArow1.add(CAButton);
@@ -60,6 +63,7 @@ public class menuGUI extends JFrame{ //main class
         CAOutputTextArea.setLineWrap(true);
         CAOutputTextArea.setWrapStyleWord(true);
         CAOutputTextArea.setEditable(false);
+        //scroll bar
         JScrollPane CAOutputTextAreaScrollPane = new JScrollPane(CAOutputTextArea);
         CArow2.add(CAOutputTextAreaScrollPane);
         //listen for button click
@@ -74,7 +78,7 @@ public class menuGUI extends JFrame{ //main class
 
     private void panel2Init() {
         //overall framework
-        ACPanel.setLayout(new GridLayout(0,1));
+        ACPanel.setLayout(new GridLayout(3,1));
         //set size
         ACrow1.setSize(new Dimension(100,10));
         ACrow2.setSize(new Dimension(100,10));
@@ -90,7 +94,7 @@ public class menuGUI extends JFrame{ //main class
         JScrollPane aminoAcidTextAreaScrollPane = new JScrollPane(ACAminoAcidTextArea);
         ACrow1.add(aminoAcidTextAreaScrollPane);
         //codon label
-        ACCodonLabel = new JLabel("                          Codon:       ");
+        ACCodonLabel = new JLabel("                               Codon:       "); 
         ACrow2.add(ACCodonLabel);
         //codon text area
         ACCodonTextArea = new JTextArea(4,13);
@@ -99,7 +103,7 @@ public class menuGUI extends JFrame{ //main class
         ACrow2.add(ACCodonTextArea);
         //scroll bar
         JScrollPane codonTextAreaScrollPane = new JScrollPane(ACCodonTextArea);
-        ACrow1.add(codonTextAreaScrollPane);
+        ACrow2.add(codonTextAreaScrollPane);
         //button
         ACButton = new JButton("Submit");
         ACrow2.add(ACButton);
@@ -107,7 +111,7 @@ public class menuGUI extends JFrame{ //main class
         ACButtonListener listener = new ACButtonListener();
         ACButton.addActionListener(listener);
         //spacing
-        ACrow3.add(new JLabel("                     "));
+        ACrow3.add(new JLabel("                       "));
         //output text area
         ACOutputTextArea = new JTextArea(1,13);
         ACOutputTextArea.setEditable(false);
@@ -116,6 +120,7 @@ public class menuGUI extends JFrame{ //main class
         ACPanel.add(ACrow1);
         ACPanel.add(ACrow2);
         ACPanel.add(ACrow3);
+        
         ACPanel.setVisible(true);
     }
 
@@ -182,7 +187,7 @@ public class menuGUI extends JFrame{ //main class
             System.out.println("Codon Table Not Found");
             System.exit(2);
         }
-        frame.setBounds(400, 400, 600, 400); //set size of window
+        frame.setBounds(200, 400, 600, 400); //set size of window
         frame.setVisible(true);
     }
 }
