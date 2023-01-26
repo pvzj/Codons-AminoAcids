@@ -1,6 +1,11 @@
 import java.awt.*; //Gui libraries
 import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
+
 import java.io.IOException;
 
 public class menuGUI extends JFrame{ //main class
@@ -19,7 +24,7 @@ public class menuGUI extends JFrame{ //main class
     private JLabel ACCodonLabel = new JLabel();
     private JTextArea ACCodonTextArea = new JTextArea();
     private JButton ACButton = new JButton();
-    private JTextArea ACOutputTextArea = new JTextArea();
+    private JTextPane ACOutputTextPane = new JTextPane();
     //rows of codon-amino acid page
     private JPanel CArow1 = new JPanel();
     private JPanel CArow2 = new JPanel();
@@ -27,6 +32,9 @@ public class menuGUI extends JFrame{ //main class
     private JPanel ACrow1 = new JPanel();
     private JPanel ACrow2 = new JPanel();
     private JPanel ACrow3 = new JPanel();
+
+    private StyledDocument doc = ACOutputTextPane.getStyledDocument();
+    private Style style = ACOutputTextPane.addStyle("Green", null);
     //constructor
     public menuGUI(){
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -113,9 +121,9 @@ public class menuGUI extends JFrame{ //main class
         //spacing
         ACrow3.add(new JLabel("                       "));
         //output text area
-        ACOutputTextArea = new JTextArea(1,13);
-        ACOutputTextArea.setEditable(false);
-        ACrow3.add(ACOutputTextArea);
+        ACOutputTextPane.setEditable(false);
+        ACrow3.add(ACOutputTextPane);
+        ACOutputTextPane.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.black));
         //add elements
         ACPanel.add(ACrow1);
         ACPanel.add(ACrow2);
@@ -158,12 +166,46 @@ public class menuGUI extends JFrame{ //main class
         public void actionPerformed(ActionEvent event) {
             String aminoAcid = ACAminoAcidTextArea.getText(); //get text from text box
             String codons = ACCodonTextArea.getText();
-            String output = CodonAminoAcid.aminoAcidCodonChecker(codons, aminoAcid); //send to function
-            System.out.println(output); //print output for debugging
-            ACOutputTextArea.setText(output); //set output text
-            ACAminoAcidTextArea.setText(""); //clear input boxes
-            ACCodonTextArea.setText("");
+            try{doc.remove(0, doc.getLength());}
+            catch (BadLocationException e) {}
+            // String output = CodonAminoAcid.aminoAcidCodonChecker(codons, aminoAcid); //send to function
+            boolean[] output = aminoAcidCodonCheckerTest(codons, aminoAcid);
+            String[] codonArray = splitCodons(codons);
+            boolean isCompletelyCorrect = true;
+            for (int i = 0; i < output.length; i++) {
+                if (output[i]) {
+                    StyleConstants.setForeground(style, Color.green);
+                    try { doc.insertString(doc.getLength(), codonArray[i],style); }
+                    catch (BadLocationException e){}
+                    // outputText += "\u2713";
+                } else {
+                    StyleConstants.setForeground(style, Color.red);
+                    try { doc.insertString(doc.getLength(), codonArray[i],style); }
+                    catch (BadLocationException e){}
+                    // outputText+= "\u2716";
+                    isCompletelyCorrect = false;
+                }
+            }
+
+            // System.out.println(output.toString()); //print output for debugging
+            // System.out.println(outputText);
+            // System.out.println(isCompletelyCorrect);
+
+            // ACOutputTextPane.setText(isCompletelyCorrect + " " + outputText); //set output text
+            
         }
+
+        private String[] splitCodons(String codons) {
+            String[] codonArray = new String[codons.length()/3];
+            for (int i = 0; i < codons.length(); i+=3) {
+                codonArray[i/3] = codons.substring(i, i+3); 
+            }
+            return codonArray;
+        }
+    }
+
+    private boolean[] aminoAcidCodonCheckerTest(String codons, String aminoAcid) {
+        return new boolean[] {true, true};
     }
 
     private void initMenu() { //initialize menu bar
