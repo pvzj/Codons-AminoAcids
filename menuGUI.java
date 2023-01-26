@@ -32,7 +32,7 @@ public class menuGUI extends JFrame{ //main class
     private JPanel ACrow1 = new JPanel();
     private JPanel ACrow2 = new JPanel();
     private JPanel ACrow3 = new JPanel();
-
+    //style for colored grading
     private StyledDocument doc = ACOutputTextPane.getStyledDocument();
     private Style style = ACOutputTextPane.addStyle("Green", null);
     //constructor
@@ -140,6 +140,8 @@ public class menuGUI extends JFrame{ //main class
         @Override
         public void actionPerformed(ActionEvent e) { //if button is clicked
             changePanel(panel);
+            revalidate(); 
+            repaint();
         }
     }
     //replace the panel currently on the screen
@@ -166,38 +168,26 @@ public class menuGUI extends JFrame{ //main class
         public void actionPerformed(ActionEvent event) {
             String aminoAcid = ACAminoAcidTextArea.getText(); //get text from text box
             String codons = ACCodonTextArea.getText();
-            try{doc.remove(0, doc.getLength());}
+            try{doc.remove(0, doc.getLength());} //remove existing color
             catch (BadLocationException e) {}
-            // String output = CodonAminoAcid.aminoAcidCodonChecker(codons, aminoAcid); //send to function
-            boolean[] output = aminoAcidCodonCheckerTest(codons, aminoAcid);
-            String[] codonArray = splitCodons(codons);
-            boolean isCompletelyCorrect = true;
-            for (int i = 0; i < output.length; i++) {
-                if (output[i]) {
-                    StyleConstants.setForeground(style, Color.green);
-                    try { doc.insertString(doc.getLength(), codonArray[i],style); }
+            boolean[] output = aminoAcidCodonCheckerTest(codons, aminoAcid); //send to function
+            String[] codonArray = splitCodons(codons); //split up codons
+            for (int i = 0; i < output.length; i++) { //parse through boolean array
+                if (output[i]) { //if the codon is true
+                    StyleConstants.setForeground(style, Color.green); //set to green
+                    try { doc.insertString(doc.getLength(), codonArray[i],style); } //insert codon
                     catch (BadLocationException e){}
-                    // outputText += "\u2713";
-                } else {
-                    StyleConstants.setForeground(style, Color.red);
-                    try { doc.insertString(doc.getLength(), codonArray[i],style); }
+                } else { //otherwise (wrong)
+                    StyleConstants.setForeground(style, Color.red); //set to red
+                    try { doc.insertString(doc.getLength(), codonArray[i],style); } //insert codon
                     catch (BadLocationException e){}
-                    // outputText+= "\u2716";
-                    isCompletelyCorrect = false;
                 }
             }
-
-            // System.out.println(output.toString()); //print output for debugging
-            // System.out.println(outputText);
-            // System.out.println(isCompletelyCorrect);
-
-            // ACOutputTextPane.setText(isCompletelyCorrect + " " + outputText); //set output text
-            
         }
 
-        private String[] splitCodons(String codons) {
-            String[] codonArray = new String[codons.length()/3];
-            for (int i = 0; i < codons.length(); i+=3) {
+        private String[] splitCodons(String codons) { //splits codons string into individual codons
+            String[] codonArray = new String[codons.length()/3]; //create new array
+            for (int i = 0; i < codons.length(); i+=3) { //
                 codonArray[i/3] = codons.substring(i, i+3); 
             }
             return codonArray;
