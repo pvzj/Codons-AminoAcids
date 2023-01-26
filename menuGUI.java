@@ -102,7 +102,7 @@ public class menuGUI extends JFrame{ //main class
         JScrollPane aminoAcidTextAreaScrollPane = new JScrollPane(ACAminoAcidTextArea);
         ACrow1.add(aminoAcidTextAreaScrollPane);
         //codon label
-        ACCodonLabel = new JLabel("                               Codon:       "); 
+        ACCodonLabel = new JLabel("                           Codon:       "); 
         ACrow2.add(ACCodonLabel);
         //codon text area
         ACCodonTextArea = new JTextArea(4,13);
@@ -123,7 +123,7 @@ public class menuGUI extends JFrame{ //main class
         //output text area
         ACOutputTextPane.setEditable(false);
         ACrow3.add(ACOutputTextPane);
-        ACOutputTextPane.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.black));
+        // ACOutputTextPane.setBorder(BorderFactory.createMatteBorder(4, 4, 4, 4, Color.black));
         //add elements
         ACPanel.add(ACrow1);
         ACPanel.add(ACrow2);
