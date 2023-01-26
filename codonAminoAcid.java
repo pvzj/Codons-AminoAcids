@@ -1,6 +1,7 @@
 // Imports
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 import java.io.BufferedReader;
@@ -22,8 +23,8 @@ public class CodonAminoAcid {
         int codonsLength = codons.length(); // codons string length
 
         // Checks to make sure codon string is in the correct format
-        if (!isValidCodonString(codons)) {
-            output = "Error, invalid codon.";
+        if (!(isValidCodonString(codons).equals("true"))) {
+            output = isValidCodonString(codons);
             return output;
         }
 
@@ -41,17 +42,41 @@ public class CodonAminoAcid {
         return output;
     }
 
+    // Converts a string of nucleotide letters to an array of amino acids
+    public static String[] codonsToAminoAcidsArray(String codons) {
+        String[] output = new String[codons.length() / 3]; // Output string
+        int codonsLength = codons.length(); // codons string length
+
+        // Checks to make sure codon string is in the correct format
+        if (!(isValidCodonString(codons).equals("true"))) {
+            output[0] = "false";
+            output[1] = isValidCodonString(codons);
+            return output;
+        }
+
+        // Converts codons to amino acids
+        for (int i = 0; i < output.length; i++) {
+            for (int j = 0; j < codonsLength; j = j + 3) {
+                String codon = codons.substring(j, j + 3);
+
+                output[i] = codonToAminoAcid(codon);
+            }
+        }
+
+        return output;
+    }
+
     // Incomplete function, disregard for now
-    public static String aminoAcidCodonChecker(String codons, String correctAminoAcids) {
-        String output = "";
+    public static boolean[] aminoAcidCodonChecker(String codons, String correctAminoAcids) {
+        boolean[] output = new boolean[codons.length()/3];
         String aminoAcids = codonsToAminoAcids(codons);
         correctAminoAcids = parseAminoAcids(correctAminoAcids);
         aminoAcids = parseAminoAcids(aminoAcids);
 
         if (aminoAcids.equals(correctAminoAcids)) {
-            output = "Correct.";
+            //output = "Correct.";
         } else {
-            output = "Incorrect.";
+            //output = "Incorrect.";
         }
 
         return output;
@@ -94,31 +119,32 @@ public class CodonAminoAcid {
         return output;
     }
 
-    public static boolean isValidCodonString(String s) {
+    public static String isValidCodonString(String s) {
+        String output = "";
+
         if (s == null || s.length() == 0) {
             System.out.println("Empty input");
-            return false;
+            output = "Empty input";
+            return output;
         }
 
         if (s.length() % 3 != 0) {
             System.out.println("Length of string not divisible by 3");
-            return false;
-        }
-
-        if (new StringTokenizer(s, " ").countTokens() != 1) {
-            System.out.println("More than one token long");
-            return false;
+            output = "Length of string not divisible by 3";
+            return output;
         }
 
         for (int i = 0; i < s.length(); i++) {
             char c= s.charAt(i);
             if (!(c == 'A' || c == 'C' || c == 'G' || c == 'U')) {
                 System.out.println("Contains invalid character");
-                return false;
+                output = "Contains invalid character";
+                return output;
             }
         }
 
-        return true;
+        output = "true";
+        return output;
     }
 
 
@@ -134,11 +160,12 @@ public class CodonAminoAcid {
         System.out.println();
 
         // tests aminoAcidCodonChecker
-        System.out.println(aminoAcidCodonChecker(
+        /*System.out.println(Arrays.toString(aminoAcidCodonChecker(
                 "CCCCCCCAAAUGACU",
-                "Proline, Proline, Glutamine, Methionine, Threonine"));
+                "Proline, Proline, Glutamine, Methionine, Threonine")));
+        */
 
-        System.out.println();
+        System.out.println(Arrays.toString(codonsToAminoAcidsArray("CCCCCCCAAAUGACU")));
 
         // tests parseInput
         System.out.println(parseAminoAcids(
