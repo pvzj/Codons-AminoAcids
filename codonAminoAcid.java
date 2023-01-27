@@ -154,6 +154,7 @@ public class CodonAminoAcid {
 
 
     // Main method, currently used for testing purposes
+    /*
     public static void main(String[] args) throws IOException {
         // calls fillHashMap and fills the hashmap using codontable.txt
         fillHashMap("codontable.txt");
@@ -176,4 +177,5 @@ public class CodonAminoAcid {
         System.out.println(Arrays.toString(parseAminoAcids(
                 "Proline, Proline, Glutamine, Methionine, Threonine")));
     }
+    */
 }
