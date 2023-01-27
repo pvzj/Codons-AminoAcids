@@ -55,13 +55,15 @@ public class CodonAminoAcid {
         }
 
         // Converts codons to amino acids
-        for (int i = 0; i < output.length; i++) {
-            for (int j = 0; j < codonsLength; j = j + 3) {
-                String codon = codons.substring(j, j + 3);
+            for (int i = 0; i < codonsLength; i = i + 3) {
+                String aminoAcid;
+                String codon = codons.substring(i, i + 3);
 
-                output[i] = codonToAminoAcid(codon);
+                aminoAcid = codonToAminoAcid(codon);
+                aminoAcid = aminoAcid.toLowerCase();
+
+                output[i/3] = aminoAcid;
             }
-        }
 
         return output;
     }
@@ -69,14 +71,22 @@ public class CodonAminoAcid {
     // Incomplete function, disregard for now
     public static boolean[] aminoAcidCodonChecker(String codons, String correctAminoAcids) {
         boolean[] output = new boolean[codons.length()/3];
-        String aminoAcids = codonsToAminoAcids(codons);
-        correctAminoAcids = parseAminoAcids(correctAminoAcids);
-        aminoAcids = parseAminoAcids(aminoAcids);
+        String[] aminoAcids = codonsToAminoAcidsArray(codons);
 
-        if (aminoAcids.equals(correctAminoAcids)) {
-            //output = "Correct.";
-        } else {
-            //output = "Incorrect.";
+        if (aminoAcids[0].equals("false")) {
+            System.out.println(aminoAcids[1]);
+
+            return null;
+        }
+
+        String[] correctAminoAcidsArray = parseAminoAcids(correctAminoAcids);
+
+        for (int i = 0; i < aminoAcids.length; i++) {
+            if (aminoAcids[i].equals(correctAminoAcidsArray[i])) {
+                output[i] = true;
+            } else {
+                output[i] = false;
+            }
         }
 
         return output;
@@ -97,17 +107,12 @@ public class CodonAminoAcid {
         }
     }
 
-    public static String parseAminoAcids(String input) {
-        String output = "";
+    public static String[] parseAminoAcids(String input) {
         input = input.replaceAll("\\s", "");
         input = input.toLowerCase();
         String words[] = input.split(",");
 
-        for (int i = 0; i < words.length; i++) {
-            output += words[i];
-        }
-
-        return output;
+        return words;
     }
 
     public static String parseCodons(String input) {
@@ -160,15 +165,15 @@ public class CodonAminoAcid {
         System.out.println();
 
         // tests aminoAcidCodonChecker
-        /*System.out.println(Arrays.toString(aminoAcidCodonChecker(
+        System.out.println(Arrays.toString(aminoAcidCodonChecker(
                 "CCCCCCCAAAUGACU",
                 "Proline, Proline, Glutamine, Methionine, Threonine")));
-        */
+
 
         System.out.println(Arrays.toString(codonsToAminoAcidsArray("CCCCCCCAAAUGACU")));
 
         // tests parseInput
-        System.out.println(parseAminoAcids(
-                "Proline, Proline, Glutamine, Methionine, Threonine"));
+        System.out.println(Arrays.toString(parseAminoAcids(
+                "Proline, Proline, Glutamine, Methionine, Threonine")));
     }
 }

@@ -8,7 +8,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e0d36f54-8d52-4019-9583-b04d1e0577ff" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/codonAminoAcid.java" beforeDir="false" afterPath="$PROJECT_DIR$/codonAminoAcid.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CodonAminoAcid.java" beforeDir="false" afterPath="$PROJECT_DIR$/CodonAminoAcid.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
