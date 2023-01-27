@@ -170,17 +170,23 @@ public class menuGUI extends JFrame{ //main class
             String codons = ACCodonTextArea.getText();
             try{doc.remove(0, doc.getLength());} //remove existing color
             catch (BadLocationException e) {}
-            boolean[] output = aminoAcidCodonCheckerTest(codons, aminoAcid); //send to function
-            String[] codonArray = splitCodons(codons); //split up codons
-            for (int i = 0; i < output.length; i++) { //parse through boolean array
-                if (output[i]) { //if the codon is true
-                    StyleConstants.setForeground(style, Color.green); //set to green
-                    try { doc.insertString(doc.getLength(), codonArray[i],style); } //insert codon
-                    catch (BadLocationException e){}
-                } else { //otherwise (wrong)
-                    StyleConstants.setForeground(style, Color.red); //set to red
-                    try { doc.insertString(doc.getLength(), codonArray[i],style); } //insert codon
-                    catch (BadLocationException e){}
+            boolean[] output = CodonAminoAcid.aminoAcidCodonChecker(codons, aminoAcid); //send to function
+            if (output == null) {
+                StyleConstants.setForeground(style, Color.red); 
+                try { doc.insertString(doc.getLength(), CodonAminoAcid.isValidCodonString(codons),style); } //insert codon
+                catch (BadLocationException e){}
+            } else {
+                String[] codonArray = splitCodons(codons); //split up codons
+                for (int i = 0; i < output.length; i++) { //parse through boolean array
+                    if (output[i]) { //if the codon is true
+                        StyleConstants.setForeground(style, Color.green); //set to green
+                        try { doc.insertString(doc.getLength(), codonArray[i],style); } //insert codon
+                        catch (BadLocationException e){}
+                    } else { //otherwise (wrong)
+                        StyleConstants.setForeground(style, Color.red); //set to red
+                        try { doc.insertString(doc.getLength(), codonArray[i],style); } //insert codon
+                        catch (BadLocationException e){}
+                    }
                 }
             }
         }
@@ -192,10 +198,6 @@ public class menuGUI extends JFrame{ //main class
             }
             return codonArray;
         }
-    }
-
-    private boolean[] aminoAcidCodonCheckerTest(String codons, String aminoAcid) {
-        return new boolean[] {true, true};
     }
 
     private void initMenu() { //initialize menu bar
