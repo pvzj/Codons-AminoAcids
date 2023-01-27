@@ -2,11 +2,13 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="Codons-AminoAcids Test:jar" />
+      <artifact name="Codons-AminoAcids Auto Grader:jar" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e0d36f54-8d52-4019-9583-b04d1e0577ff" name="Changes" comment="" />
+    <list default="true" id="e0d36f54-8d52-4019-9583-b04d1e0577ff" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,8 +31,8 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "last_opened_file_path": "C:/Users/vreddy/OneDrive - Eastside Preparatory School/Desktop/9th Grade/Biology/Class Contribution/Codons_Amino_Acids",
     "project.structure.last.edited": "Artifacts",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
     "settings.editor.selected.configurable": "vcs.Git"
   }
 }]]></component>
