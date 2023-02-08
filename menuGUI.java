@@ -216,7 +216,7 @@ public class menuGUI extends JFrame{ //main class
     public static void main(String[] args) { //main method, program starts from here
         menuGUI frame = new menuGUI(); //create new GUI
         try { //try to find the codon table file
-            CodonAminoAcid.fillHashMap("codonTable.txt");
+            CodonAminoAcid.fillHashMap("abbreviatedcodontable.txt");
         } catch(IOException e) { // if not found, close program
             System.out.println("Codon Table Not Found");
             System.exit(2);
